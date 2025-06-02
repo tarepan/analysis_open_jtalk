@@ -139,16 +139,6 @@ int JPCommonNode_get_chain_flag(JPCommonNode * node)
 }
 // NOTE: just set & get ========
 
-void JPCommonNode_copy(JPCommonNode * node1, JPCommonNode * node2)
-{
-   JPCommonNode_set_pron(node1, node2->pron);
-   JPCommonNode_set_pos(node1, node2->pos);
-   JPCommonNode_set_ctype(node1, node2->ctype);
-   JPCommonNode_set_cform(node1, node2->cform);
-   JPCommonNode_set_acc(node1, node2->acc);
-   JPCommonNode_set_chain_flag(node1, node2->chain_flag);
-}
-
 void JPCommonNode_clear(JPCommonNode * node)
 {
    if (node->pron != NULL) {
