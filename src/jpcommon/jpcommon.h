@@ -138,8 +138,6 @@ void JPCommonLabel_push_word(JPCommonLabel * label, const char *pron, const char
 void JPCommonLabel_make(JPCommonLabel * label);
 int JPCommonLabel_get_size(JPCommonLabel * label);
 char **JPCommonLabel_get_feature(JPCommonLabel * label);
-void JPCommonLabel_print(JPCommonLabel * label);
-void JPCommonLabel_fprint(JPCommonLabel * label, FILE * fp);
 void JPCommonLabel_clear(JPCommonLabel * label);
 
 /* JPCommonNode
@@ -172,8 +170,6 @@ const char *JPCommonNode_get_ctype(JPCommonNode * node);
 const char *JPCommonNode_get_cform(JPCommonNode * node);
 int JPCommonNode_get_acc(JPCommonNode * node);
 int JPCommonNode_get_chain_flag(JPCommonNode * node);
-void JPCommonNode_print(JPCommonNode * node);
-void JPCommonNode_fprint(JPCommonNode * node, FILE * fp);
 void JPCommonNode_clear(JPCommonNode * node);
 
 /* JPCommon */
@@ -190,8 +186,6 @@ void JPCommon_push(JPCommon * jpcommon, JPCommonNode * node);
 void JPCommon_make_label(JPCommon * jpcommon);
 int JPCommon_get_label_size(JPCommon * jpcommon);
 char **JPCommon_get_label_feature(JPCommon * jpcommon);
-void JPCommon_print(JPCommon * jpcommon);
-void JPCommon_fprint(JPCommon * jpcommon, FILE * fp);
 void JPCommon_refresh(JPCommon * jpcommon);
 void JPCommon_clear(JPCommon * jpcommon);
 

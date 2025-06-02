@@ -132,19 +132,6 @@ char **JPCommon_get_label_feature(JPCommon * jpcommon)
       return NULL;
 }
 
-void JPCommon_print(JPCommon * jpcommon)
-{
-   JPCommon_fprint(jpcommon, stdout);
-}
-
-void JPCommon_fprint(JPCommon * jpcommon, FILE * fp)
-{
-   JPCommonNode *node;
-
-   for (node = jpcommon->head; node != NULL; node = node->next)
-      JPCommonNode_fprint(node, fp);
-}
-
 void JPCommon_refresh(JPCommon * jpcommon)
 {
    JPCommon_clear(jpcommon);

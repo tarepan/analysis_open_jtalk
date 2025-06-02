@@ -149,17 +149,6 @@ void JPCommonNode_copy(JPCommonNode * node1, JPCommonNode * node2)
    JPCommonNode_set_chain_flag(node1, node2->chain_flag);
 }
 
-void JPCommonNode_print(JPCommonNode * node)
-{
-   JPCommonNode_fprint(node, stdout);
-}
-
-void JPCommonNode_fprint(JPCommonNode * node, FILE * fp)
-{
-   fprintf(fp, "%s,%s,%s,%s,%d,%d\n", node->pron, node->pos, node->ctype, node->cform, node->acc,
-           node->chain_flag);
-}
-
 void JPCommonNode_clear(JPCommonNode * node)
 {
    if (node->pron != NULL) {

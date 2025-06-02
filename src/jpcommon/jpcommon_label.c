@@ -1017,46 +1017,6 @@ char **JPCommonLabel_get_feature(JPCommonLabel * label)
    return label->feature;
 }
 
-void JPCommonLabel_print(JPCommonLabel * label)
-{
-   JPCommonLabel_fprint(label, stdout);
-}
-
-void JPCommonLabel_fprint(JPCommonLabel * label, FILE * fp)
-{
-   JPCommonLabelPhoneme *p;
-   JPCommonLabelMora *m;
-   JPCommonLabelWord *w;
-   JPCommonLabelAccentPhrase *a;
-   JPCommonLabelBreathGroup *b;
-   int i = 0;
-   int j = 0;
-
-   for (b = label->breath_head; b != NULL; b = b->next) {
-      fprintf(fp, "%d\n", j++);
-      for (a = b->head; a != NULL; a = a->next) {
-         fprintf(fp, "   %d\n", i++);
-         for (w = a->head; w != NULL; w = w->next) {
-            fprintf(fp, "      %s %s %s %s\n", w->pron, w->pos, w->ctype, w->cform);
-            for (m = w->head; m != NULL; m = m->next) {
-               fprintf(fp, "         %s\n", m->mora);
-               for (p = m->head; p != NULL; p = p->next) {
-                  fprintf(fp, "            %s\n", p->phoneme);
-                  if (p == m->tail)
-                     break;
-               }
-               if (m == w->tail)
-                  break;
-            }
-            if (w == a->tail)
-               break;
-         }
-         if (a == b->tail)
-            break;
-      }
-   }
-}
-
 void JPCommonLabel_clear(JPCommonLabel * label)
 {
    int i;
