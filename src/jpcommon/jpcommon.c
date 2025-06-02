@@ -88,7 +88,7 @@ void JPCommon_make_label(JPCommon * jpcommon)
 
    /* initialize */
    if (jpcommon->label != NULL)
-      JPCommonLabel_clear(jpcommon->label);
+      1; // NOTE: remove clear of label for jpcommon_min
    else
       jpcommon->label = (JPCommonLabel *) calloc(1, sizeof(JPCommonLabel));
    JPCommonLabel_initialize(jpcommon->label);
@@ -130,31 +130,6 @@ char **JPCommon_get_label_feature(JPCommon * jpcommon)
       return JPCommonLabel_get_feature(jpcommon->label);
    else
       return NULL;
-}
-
-void JPCommon_refresh(JPCommon * jpcommon)
-{
-   JPCommon_clear(jpcommon);
-   JPCommon_initialize(jpcommon);
-}
-
-void JPCommon_clear(JPCommon * jpcommon)
-{
-   JPCommonNode *node;
-
-   while (jpcommon->head != NULL) {
-      node = jpcommon->head->next;
-      JPCommonNode_clear(jpcommon->head);
-      free(jpcommon->head);
-      jpcommon->head = node;
-   }
-   jpcommon->tail = NULL;
-
-   if (jpcommon->label != NULL) {
-      JPCommonLabel_clear(jpcommon->label);
-      free(jpcommon->label);
-   }
-   jpcommon->label = NULL;
 }
 
 JPCOMMON_C_END;

@@ -95,7 +95,7 @@ static void Open_JTalk_clear(Open_JTalk * open_jtalk)
 {
    Mecab_clear(&open_jtalk->mecab);
    NJD_clear(&open_jtalk->njd);
-   JPCommon_clear(&open_jtalk->jpcommon);
+   // NOTE: remove clear of jpcommon for jpcommon_min
    HTS_Engine_clear(&open_jtalk->engine);
 }
 
@@ -185,7 +185,7 @@ static int Open_JTalk_synthesis(Open_JTalk * open_jtalk, const char *txt, FILE *
    njd2jpcommon(&open_jtalk->jpcommon, &open_jtalk->njd);
    JPCommon_make_label(&open_jtalk->jpcommon);
    // NOTE: remove speech synthesis for jpcommon_min
-   JPCommon_refresh(&open_jtalk->jpcommon);
+   // NOTE: remove refresh of jpcommon for jpcommon_min
    NJD_refresh(&open_jtalk->njd);
    Mecab_refresh(&open_jtalk->mecab);
 

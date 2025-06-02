@@ -139,30 +139,6 @@ int JPCommonNode_get_chain_flag(JPCommonNode * node)
 }
 // NOTE: just set & get ========
 
-void JPCommonNode_clear(JPCommonNode * node)
-{
-   if (node->pron != NULL) {
-      free(node->pron);
-      node->pron = NULL;
-   }
-   if (node->pos != NULL) {
-      free(node->pos);
-      node->pos = NULL;
-   }
-   if (node->ctype != NULL) {
-      free(node->ctype);
-      node->ctype = NULL;
-   }
-   if (node->cform != NULL) {
-      free(node->cform);
-      node->cform = NULL;
-   }
-   node->acc = 0;
-   node->chain_flag = -1;
-   node->prev = NULL;
-   node->next = NULL;
-}
-
 JPCOMMON_NODE_C_END;
 
 #endif                          /* !JPCOMMON_NODE_C */

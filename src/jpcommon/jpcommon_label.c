@@ -142,11 +142,6 @@ static void JPCommonLabelPhoneme_convert_unvoice(JPCommonLabelPhoneme * p)
            p->phoneme);
 }
 
-static void JPCommonLabelPhoneme_clear(JPCommonLabelPhoneme * p)
-{
-   free(p->phoneme);
-}
-
 static void JPCommonLabelMora_initialize(JPCommonLabelMora * m, const char *mora,
                                          JPCommonLabelPhoneme * head, JPCommonLabelPhoneme * tail,
                                          JPCommonLabelMora * prev, JPCommonLabelMora * next,
@@ -158,11 +153,6 @@ static void JPCommonLabelMora_initialize(JPCommonLabelMora * m, const char *mora
    m->prev = prev;
    m->next = next;
    m->up = up;
-}
-
-static void JPCommonLabelMora_clear(JPCommonLabelMora * m)
-{
-   free(m->mora);
 }
 
 // NOTE: ワード情報をフォーマット変換して JPCommonLabelWord を生成する。
@@ -228,14 +218,6 @@ static void JPCommonLabelWord_initialize(JPCommonLabelWord * w, const char *pron
    w->next = next;
 }
 
-static void JPCommonLabelWord_clear(JPCommonLabelWord * w)
-{
-   free(w->pron);
-   free(w->pos);
-   free(w->ctype);
-   free(w->cform);
-}
-
 static void JPCommonLabelAccentPhrase_initialize(JPCommonLabelAccentPhrase * a, int acc,
                                                  const char *emotion, JPCommonLabelWord * head,
                                                  JPCommonLabelWord * tail,
@@ -255,12 +237,6 @@ static void JPCommonLabelAccentPhrase_initialize(JPCommonLabelAccentPhrase * a, 
    a->up = up;
 }
 
-static void JPCommonLabelAccentPhrase_clear(JPCommonLabelAccentPhrase * a)
-{
-   if (a->emotion != NULL)
-      free(a->emotion);
-}
-
 static void JPCommonLabelBreathGroup_initialize(JPCommonLabelBreathGroup * b,
                                                 JPCommonLabelAccentPhrase * head,
                                                 JPCommonLabelAccentPhrase * tail,
@@ -271,10 +247,6 @@ static void JPCommonLabelBreathGroup_initialize(JPCommonLabelBreathGroup * b,
    b->tail = tail;
    b->prev = prev;
    b->next = next;
-}
-
-static void JPCommonLabelBreathGroup_clear(JPCommonLabelBreathGroup * b)
-{
 }
 
 static int index_mora_in_accent_phrase(JPCommonLabelMora * m)
@@ -1015,47 +987,6 @@ char **JPCommonLabel_get_feature(JPCommonLabel * label)
 // NOTE: フルコンテキストラベル系列を取得する。
 {
    return label->feature;
-}
-
-void JPCommonLabel_clear(JPCommonLabel * label)
-{
-   int i;
-   JPCommonLabelPhoneme *p, *pn;
-   JPCommonLabelMora *m, *mn;
-   JPCommonLabelWord *w, *wn;
-   JPCommonLabelAccentPhrase *a, *an;
-   JPCommonLabelBreathGroup *b, *bn;
-
-   for (p = label->phoneme_head; p != NULL; p = pn) {
-      pn = p->next;
-      JPCommonLabelPhoneme_clear(p);
-      free(p);
-   }
-   for (m = label->mora_head; m != NULL; m = mn) {
-      mn = m->next;
-      JPCommonLabelMora_clear(m);
-      free(m);
-   }
-   for (w = label->word_head; w != NULL; w = wn) {
-      wn = w->next;
-      JPCommonLabelWord_clear(w);
-      free(w);
-   }
-   for (a = label->accent_head; a != NULL; a = an) {
-      an = a->next;
-      JPCommonLabelAccentPhrase_clear(a);
-      free(a);
-   }
-   for (b = label->breath_head; b != NULL; b = bn) {
-      bn = b->next;
-      JPCommonLabelBreathGroup_clear(b);
-      free(b);
-   }
-   if (label->feature != NULL) {
-      for (i = 0; i < label->size; i++)
-         free(label->feature[i]);
-      free(label->feature);
-   }
 }
 
 JPCOMMON_LABEL_C_END;
